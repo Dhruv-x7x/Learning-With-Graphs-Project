@@ -18,3 +18,5 @@ The solution to this problem involves two main parts:
 
 ---
 
+### Principles and Requirements for the Diffusion Process
+

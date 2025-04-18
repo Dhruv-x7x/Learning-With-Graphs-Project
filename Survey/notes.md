@@ -22,3 +22,14 @@ There exists other data-driven path generation models such as simple markov mode
 
 ### Graph Constrained Diffusion Model
 
+The model starts with a noisy distribution or like a random graph and gradually refines this by 'spreading out' the probability over the constrained paths in the same way as how heat diffusion works in metals. This part is called the 'Forward pass'. This continues until we get a valid, structured path distribution. The entire process of generating a path is handled by GDP itself without needing extra optimization steps. 
+
+The paper also "exploits a tailored self-attention mechanism" to keep in check the origin, destination and current path while generating paths. This ensures a spatio-temporal relation with the model at all times, and is used as prior evidence for the conditional sampling via node2vec.
+
+#### How the training works
+
+It gradually adds noise to real paths and adds vertex probabilities across the graph and then it learns to denoise these paths. Essentially it should then generate real paths from random initial states. They key innovation here is to use **Graph Laplacian** to constrain the diffusion process to valid paths.
+
+---
+
+### Problem Definition

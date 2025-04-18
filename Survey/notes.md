@@ -43,16 +43,20 @@ where $(v_i, v_{i+1})$ denotes an edge between vertices $v_i$ and $v_{i+1}$.
 
 #### Definition 2 (Path Planning)
 Given a road network graph $G = \langle V, E \rangle$ with edges weighted by $w(v_i, v_j)$, path planning aims to find a path $x = (v_0, ..., v_{|x|})$ that minimizes the total path cost between an origin $\text{ori}$ and destination $\text{dst}$, defined as:
+
 $$
 \min \sum_{i=0}^{|x|-1} w(v_i, v_{i+1})
 $$
+
 where $w(v_i, v_{i+1})$ is the weight (cost) assigned to the edge connecting vertices $v_i$ and $v_{i+1}$.
 
 #### Definition 3 (End-to-End Path Planning)
 End-to-end path planning is formulated as the task of planning paths between a given origin $\text{ori}$ and destination $\text{dst}$ by generating paths that follow the distribution of real-world path data $P$, conditioned on the origin and destination:
+
 $$
 p_\theta(x) = p_\theta(x) \cdot h(x|\text{ori}, \text{dst})
 $$
+
 where $p_\theta(x)$ is the probability distribution of paths (learned from the dataset $P$), and $h(x|\text{ori}, \text{dst})$ represents the prior information conditioned on the origin and destination.
 
 ---

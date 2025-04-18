@@ -36,9 +36,11 @@ It gradually adds noise to real paths and adds vertex probabilities across the g
 
 #### Definition 1 (Path)
 A path $x$ on a road network is defined as a sequence of vertices $(v_0, v_1, ..., v_{|x|})$ where each pair of consecutive vertices are adjacent in the graph. Formally:
+
 $$
 x = (v_0, v_1, ..., v_{|x|}) \quad \text{where} \quad (v_i, v_{i+1}) \in E, \quad \forall i = 0, 1, ..., |x|-1
 $$
+
 where $(v_i, v_{i+1})$ denotes an edge between vertices $v_i$ and $v_{i+1}$.
 
 #### Definition 2 (Path Planning)

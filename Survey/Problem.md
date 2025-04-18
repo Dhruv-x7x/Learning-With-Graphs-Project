@@ -118,4 +118,3 @@ where $p_\theta(x)$ is the probability distribution of paths (learned from the d
     - A **categorical random variable** sampled according to the probability distribution $p$.
 
 ---
-

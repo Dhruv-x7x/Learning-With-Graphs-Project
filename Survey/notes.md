@@ -35,80 +35,81 @@ It gradually adds noise to real paths and adds vertex probabilities across the g
 ### Problem Definitions
 
 #### Definition 1 (Path)
-A path \( x \) on a road network is defined as a sequence of vertices \( (v_0, v_1, ..., v_{|x|}) \) where each pair of consecutive vertices are adjacent in the graph. Formally:
-\[
+A path $x$ on a road network is defined as a sequence of vertices $(v_0, v_1, ..., v_{|x|})$ where each pair of consecutive vertices are adjacent in the graph. Formally:
+$$
 x = (v_0, v_1, ..., v_{|x|}) \quad \text{where} \quad (v_i, v_{i+1}) \in E, \quad \forall i = 0, 1, ..., |x|-1
-\]
-where \( (v_i, v_{i+1}) \) denotes an edge between vertices \( v_i \) and \( v_{i+1} \).
+$$
+where $(v_i, v_{i+1})$ denotes an edge between vertices $v_i$ and $v_{i+1}$.
 
 #### Definition 2 (Path Planning)
-Given a road network graph \( G = \langle V, E \rangle \) with edges weighted by \( w(v_i, v_j) \), path planning aims to find a path \( x = (v_0, ..., v_{|x|}) \) that minimizes the total path cost between an origin \( \text{ori} \) and destination \( \text{dst} \), defined as:
-\[
+Given a road network graph $G = \langle V, E \rangle$ with edges weighted by $w(v_i, v_j)$, path planning aims to find a path $x = (v_0, ..., v_{|x|})$ that minimizes the total path cost between an origin $\text{ori}$ and destination $\text{dst}$, defined as:
+$$
 \min \sum_{i=0}^{|x|-1} w(v_i, v_{i+1})
-\]
-where \( w(v_i, v_{i+1}) \) is the weight (cost) assigned to the edge connecting vertices \( v_i \) and \( v_{i+1} \).
+$$
+where $w(v_i, v_{i+1})$ is the weight (cost) assigned to the edge connecting vertices $v_i$ and $v_{i+1}$.
 
 #### Definition 3 (End-to-End Path Planning)
-End-to-end path planning is formulated as the task of planning paths between a given origin \( \text{ori} \) and destination \( \text{dst} \) by generating paths that follow the distribution of real-world path data \( P \). The objective is to generate a path \( x \) conditioned on the origin and destination:
-\[
+End-to-end path planning is formulated as the task of planning paths between a given origin $\text{ori}$ and destination $\text{dst}$ by generating paths that follow the distribution of real-world path data $P$, conditioned on the origin and destination:
+$$
 p_\theta(x) = p_\theta(x) \cdot h(x|\text{ori}, \text{dst})
-\]
-where \( p_\theta(x) \) is the probability distribution of paths (learned from the dataset \( P \)), and \( h(x|\text{ori}, \text{dst}) \) represents the prior information conditioned on the origin and destination.
+$$
+where $p_\theta(x)$ is the probability distribution of paths (learned from the dataset $P$), and $h(x|\text{ori}, \text{dst})$ represents the prior information conditioned on the origin and destination.
 
 ---
 
 ### Notations
 
-1. **\( G = \langle V, E \rangle \)**:
-   - A **graph** with vertices \( V \) and edges \( E \).
-   - **\( V \)**: Set of **vertices** (locations or intersections).
-   - **\( E \)**: Set of **edges** (roads between vertices).
+1. **$G = \langle V, E \rangle$**:
+   - A **graph** with vertices $V$ and edges $E$.
+   - **$V$**: Set of **vertices** (locations or intersections).
+   - **$E$**: Set of **edges** (roads between vertices).
 
-2. **\( x, P \)**:
-   - **\( x \)**: A **path** represented as a sequence of vertices \( (v_0, v_1, ..., v_{|x|}) \).
-   - **\( P \)**: A **path dataset** containing multiple paths.
+2. **$x, P$**:
+   - **$x$**: A **path** represented as a sequence of vertices $(v_0, v_1, ..., v_{|x|})$.
+   - **$P$**: A **path dataset** containing multiple paths.
 
-3. **\( (v_0, v_1, ..., v_{|x|}) \)**:
-   - A **sequence of vertices** forming a path \( x \), where each consecutive pair \( (v_i, v_{i+1}) \) represents an edge in the graph.
+3. **$(v_0, v_1, ..., v_{|x|})$**:
+   - A **sequence of vertices** forming a path $x$, where each consecutive pair $(v_i, v_{i+1})$ represents an edge in the graph.
 
-4. **\( \text{ori}, \text{dst} \)**:
+4. **$\text{ori}, \text{dst}$**:
    - The **origin** and **destination** vertices in the path planning task.
 
-5. **\( x_i, v_i \)**:
-   - \( x_i \): The **i-th vertex** in the path \( x \).
-   - \( v_i \): The **i-th vertex** in the graph \( G \).
+5. **$x_i, v_i$**:
+   - $x_i$: The **i-th vertex** in the path $x$.
+   - $v_i$: The **i-th vertex** in the graph $G$.
 
-6. **\( x_t \)**:
-   - The **diffused path** at **time step \( t \)** in the diffusion process.
+6. **$x_t$**:
+   - The **diffused path** at **time step $t$** in the diffusion process.
 
-7. **\( Q \)**:
+7. **$Q$**:
    - The **transition probability matrix** for the graph, representing the probabilities of transitioning from one vertex to another.
 
-8. **\( A, D \)**:
-   - **\( A \)**: The **adjacency matrix** of the graph, where \( A[i, j] = 1 \) if there is an edge between vertices \( v_i \) and \( v_j \), otherwise 0.
-   - **\( D \)**: The **degree matrix**, where \( D[i, i] \) represents the number of edges connected to vertex \( v_i \).
+8. **$A, D$**:
+   - **$A$**: The **adjacency matrix** of the graph, where $A[i, j] = 1$ if there is an edge between vertices $v_i$ and $v_j$, otherwise 0.
+   - **$D$**: The **degree matrix**, where $D[i, i]$ represents the number of edges connected to vertex $v_i$.
 
-9. **\( M[i, j] \)**:
-   - The element at **row \( i \)** and **column \( j \)** of matrix \( M \).
+9. **$M[i, j]$**:
+    - The element at **row $i$** and **column $j$** of matrix $M$.
 
-10. **\( M[:, j] / M[i, :] \)**:
-    - **\( M[:, j] \)**: The **j-th column** of matrix \( M \).
-    - **\( M[i, :] \)**: The **i-th row** of matrix \( M \).
+10. **$M[:, j] / M[i, :]$**:
+    - **$M[:, j]$**: The **j-th column** of matrix $M$.
+    - **$M[i, :]$**: The **i-th row** of matrix $M$.
 
-11. **\( C_\tau \)**:
-    - The **transition probability matrix** at time \( \tau \) for the diffusion process.
+11. **$C_\tau$**:
+    - The **transition probability matrix** at time $\tau$ for the diffusion process.
 
-12. **\( p, q(\cdot) \)**:
-    - **\( p \)**: A **row vector** representing a categorical distribution.
-    - **\( q(\cdot) \)**: A **row vector** representing a categorical distribution of moving between vertices.
+12. **$p, q(\cdot)$**:
+    - **$p$**: A **row vector** representing a categorical distribution.
+    - **$q(\cdot)$**: A **row vector** representing a categorical distribution of moving between vertices.
 
-13. **\( v \)**:
+13. **$v$**:
     - A **one-hot vector** representing a vertex. The one-hot encoding has 1 at the index of the vertex and 0 elsewhere.
 
-14. **\( \hat{v} \)**:
+14. **$\hat{v}$**:
     - The **estimated distribution** for a vertex after the diffusion process.
 
-15. **Cat(\( \cdot | p \))**:
-    - A **categorical random variable** sampled according to the probability distribution \( p \).
+15. **Cat($\cdot | p$)**:
+    - A **categorical random variable** sampled according to the probability distribution $p$.
 
 ---
+

@@ -16,7 +16,7 @@ Real world paths don't always have linear costs. Which means that if the edge we
 
 #### Other Learned Path Generation Methods
 
-There exists other data-driven path generation models such as simple markov models, sequence-to-sequence neural networks. These methods sure are data-driven but also unconditional, which means that they can generate paths based on real-world data patterns but fail to give constrained paths given a Origin-Destination pair. This paper introduces GDP, which generated conditional paths give a OD pair.
+There exists other data-driven path generation models such as simple markov models, sequence-to-sequence neural networks. These methods sure are data-driven but also unconditional, which means that they can generate paths based on real-world data patterns but fail to give constrained paths given a Origin-Destination pair. This paper introduces GDP, which generated conditional paths given a OD pair.
 
 ---
 

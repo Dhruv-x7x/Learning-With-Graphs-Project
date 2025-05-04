@@ -20,4 +20,4 @@ The solution to this problem involves two main parts:
 
 ### Principles and Requirements for the Diffusion Process
 
- $q(v_T\mid v_0)=\mathrm{Cat}(v_0,\bar C_T)$
+Compute the graph Laplacian or adjacency $A$ and degree $D$ matrices, then the heat-kernel-like transition matrix $C_t = \exp((A-D)\Delta t)$ for a small $\Delta t$ (or simply normalize $A$ to create a stochastic matrix). In discrete terms, define $P = \alpha I + (1-\alpha),\text{softmax}(A)$ for some noise schedule $\alpha_t$. Verify that $P$ is stochastic (rows sum to 1). A simple choice: $P = 0.9 I + 0.1 D^{-1}A$.

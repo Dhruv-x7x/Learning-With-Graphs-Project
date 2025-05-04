@@ -20,4 +20,4 @@ The solution to this problem involves two main parts:
 
 ### Principles and Requirements for the Diffusion Process
 
-$p_{t+\Delta t} = p_t,C_{\Delta t}$ where $C_t = e^{(A-D)t}$
+ $q(v_T\mid v_0)=\mathrm{Cat}(v_0,\bar C_T)$

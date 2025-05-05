@@ -47,5 +47,9 @@ From the partial differential equations we get the transition probability matrix
 
 Properties of $C_{\tau}$:
 - $C_{\tau}$ is a symmetric matrix. So  $C_{\tau}^T =  C_{\tau}$
--  $C_{\tau 1 + \tau 2} =  C_{\tau 1} C_{\tau 2}$
--   $C_{\tau} ~ \frac{11^t}{|V|}$ as $\tau$ approaches infinity  
+- $C_{\tau 1 + \tau 2} =  C_{\tau 1} C_{\tau 2}$
+- $C_{\tau} = \frac{11^t}{|V|}$ as $\tau$ approaches infinity if graph is connected
+- $C_{\tau}$ = I as $\tau$ approaches infinity
+- Summation of each row and column of $C_{\tau}$ is 1 for all $\tau > 0$ if graph is connected
+
+From this we can model the diffusion as  $q(v_t | v_{t-1}) = Cat(v_t | q(v_{t-1})C_{\tau})$

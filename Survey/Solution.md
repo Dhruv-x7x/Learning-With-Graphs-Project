@@ -37,5 +37,11 @@ The paper has the following requirements for the diffusion model:
 - Makes $q(v_T)$ independent of $q(v_0)$ for uninformed sample generation.
 - Exhibits locality for small $t$ values
 
+For this, the authors used a heat conduction partial differential equation to model the diffusion process.
+
 ---
+
+### Forward Diffusion Process
+
+From the partial differential equations we get the transition probability matrix $C_t = e^{t(A - D)}$ where $A$ is the adjacency matrix and $D$ is the degree matrix.
 

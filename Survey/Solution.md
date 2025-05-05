@@ -77,7 +77,9 @@ Thereare two ways in which paths can be diffused: the first one involves maintai
 
 So we treat the diffusion as contextual, independently diffusing each vertex such that for small $t$ values the noisy path is not too far off from the original path and for high $t$ values it is completely random, aiding sample generation. 
 
-NOTE: Although the forward process happens completely independently for each node, the reverse process is not non auto-regressive. The estimation of $\hat v_0$ is what introduces dependency. The network that predicts $\hat v_0$ takes the entire path as input, hence, vertices influence each other through this shared network. 
+**NOTE**: Although the forward process happens completely independently for each node, the reverse process is not non auto-regressive. The estimation of $\hat v_0$ is what introduces dependency. The network that predicts $\hat v_0$ takes the entire path as input, hence, vertices influence each other through this shared network. 
+
+**Cost**: Diffusion and the reverse process calls are expensive. If we only added one node at a time to our path and called diffusion every time, it would take up a lot of resources. So every time we have a prefix of length, say, $k$ then we sample $k$ more nodes and add it to the prefix before calling the diffusion and reverse processes. This means that in the next iteration we will have a prefix of $2k$ length, and this keeps increasing exponentially until we have the full path or hit max length limit.
 
 ---
 

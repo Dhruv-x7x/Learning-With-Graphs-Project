@@ -45,3 +45,7 @@ For this, the authors used a heat conduction partial differential equation to mo
 
 From the partial differential equations we get the transition probability matrix $C_t = e^{t(A - D)}$ where $A$ is the adjacency matrix and $D$ is the degree matrix.
 
+Properties of $C_{\tau}$:
+- $C_{\tau}$ is a symmetric matrix. So  $C_{\tau}^T =  C_{\tau}$
+-  $C_{\tau 1 + \tau 2} =  C_{\tau 1} C_{\tau 2}$
+-   $C_{\tau} ~ \frac{11^t}{|V|}$ as $\tau$ approaches infinity  

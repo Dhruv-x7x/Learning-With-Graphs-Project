@@ -18,6 +18,15 @@ The solution to this problem involves two main parts:
 
 ---
 
+### Why Diffusion?
+
+Sequence-to-sequence models are also used in path pattern mining but the author's opted for diffusion for the following two reasons:
+- Diffusion models show superior performance in complex generation tasks
+- Diffusion models are flexible in incorporating categorical constraints compared to seq-to-seq models
+
+---
+
 ### Principles and Requirements for the Diffusion Process
 
-Compute the graph Laplacian or adjacency $A$ and degree $D$ matrices, then the heat-kernel-like transition matrix $C_t = \exp((A-D)\Delta t)$ for a small $\Delta t$ (or simply normalize $A$ to create a stochastic matrix). In discrete terms, define $P = \alpha I + (1-\alpha),\text{softmax}(A)$ for some noise schedule $\alpha_t$. Verify that $P$ is stochastic (rows sum to 1). A simple choice: $P = 0.9 I + 0.1 D^{-1}A$.
+The categorical distribution of a node is modeled as $q(v_t | v_{t-1}) = Cat(v_t | p = q(v_{t-1})Q_t)$. Where $Q_t$ is the transition probability matrix. The choice of $Q_t$ is taken as $\alpha_t I_{|V|} + \beta_t \frac{11^T}{|V|}$
+

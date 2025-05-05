@@ -58,13 +58,13 @@ We achieve the following metrics: ```Hit ratio: 0.90, Avg LCS: 2.40, Avg DTW: 9.
 ```plaintext
 |-- Survey 
   |-- 1317_GRAPH_CONSTRAINED_DIFFUSI.pdf # the paper being implemented
-  |-- Experiments.md # describes the design of the experiments conducted by the authors
-  |-- Problem.md # desrcibes the problem the paper is trying to solve
-  |-- Solution.md # describes the solution proposed by the paper
-|-- results # contains pictures of plots
+  |-- Experiments.md                     # describes the design of the experiments conducted by the authors
+  |-- Problem.md                         # desrcibes the problem the paper is trying to solve
+  |-- Solution.md                        # describes the solution proposed by the paper
+|-- results                              # contains pictures of plots
 |-- src
-  |-- operations.py # contains the definitions of functions being used in main.py as well as class instances.
-|-- main.py # runs the training process, calls functions from operations.py
+  |-- operations.py                      # contains the definitions of functions being used in main.py as well as class instances.
+|-- main.py                              # runs the training process, calls functions from operations.py
 |-- README.md
-|-- research_2.ipynb # contains the notebook with our research. Can also be used as a substitute for main.py if you want to visualize at every step.
+|-- research_2.ipynb                     # contains the notebook with our research. Can also be used as a substitute for main.py if you want to visualize at every step.
 ```

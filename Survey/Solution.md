@@ -28,5 +28,14 @@ Sequence-to-sequence models are also used in path pattern mining but the author'
 
 ### Principles and Requirements for the Diffusion Process
 
-The categorical distribution of a node is modeled as $q(v_t | v_{t-1}) = Cat(v_t | p = q(v_{t-1})Q_t)$. Where $Q_t$ is the transition probability matrix. The choice of $Q_t$ is taken as $\alpha_t I_{|V|} + \beta_t \frac{11^T}{|V|}$ where $\beta_t = 1 - \alpha_t$, both control the forward diffusion process. Essentially $Q_t$ perturbs the original vertex's probability and redistributes it across other vertices. As $t$ approaches infinity, the distribution becomes uniform. 
+The categorical distribution of a node is modeled as $q(v_t | v_{t-1}) = Cat(v_t | p = q(v_{t-1})Q_t)$. Where $Q_t$ is the transition probability matrix. The choice of $Q_t$ is taken as $\alpha_t I_{|V|} + \beta_t \frac{11^T}{|V|}$ where $\beta_t = 1 - \alpha_t$, both control the forward diffusion process. Essentially $Q_t$ perturbs the original vertex's probability and redistributes it across other vertices. As $t$ approaches infinity, the distribution of $q(v_t)$ becomes uniform. 
+
+The paper has the following requirements for the diffusion model:
+
+- Offers a closed form for forward process.
+- Ensures a computationally feasible posterior $q(v_t | v_{t-1}, v_0)$.
+- Makes $q(v_T)$ independent of $q(v_0)$ for uninformed sample generation.
+- Exhibits locality for small $t$ values
+
+---
 

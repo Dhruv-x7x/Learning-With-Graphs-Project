@@ -77,6 +77,8 @@ Thereare two ways in which paths can be diffused: the first one involves maintai
 
 So we treat the diffusion as contextual, independently diffusing each vertex such that for small $t$ values the noisy path is not too far off from the original path and for high $t$ values it is completely random, aiding sample generation. 
 
+NOTE: Although the forward process happens completely independently for each node, the reverse process is not non auto-regressive. The estimation of $\hat v_0$ is what introduces dependency. The network that predicts $\hat v_0$ takes the entire path as input, hence, vertices influence each other through this shared network. 
+
 ---
 
 

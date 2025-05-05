@@ -53,3 +53,14 @@ Properties of $C_{\tau}$:
 - Summation of each row and column of $C_{\tau}$ is 1 for all $\tau > 0$ if graph is connected
 
 From this we can model the diffusion as  $q(v_t | v_{t-1}) = Cat(v_t | q(v_{t-1})C_{\tau})$
+
+---
+
+### Reverse Process
+
+The reverse process is modeled as,
+
+$$
+q(v_{t-1} | v_t, \hat v_0) = Cat(v_{t-1} | p \propto v_tC_t \circ \hat v_0 \bar C_{t-1}
+$$
+

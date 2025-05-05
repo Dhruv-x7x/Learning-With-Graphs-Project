@@ -72,7 +72,7 @@ def main():
     n_epochs = 1000
     for epoch in range(n_epochs):
         model.train()
-        noisy_paths, clean_paths, oris, dsts, ts, masks, dst_pos = prepare_batch(paths, pos, t_values, device, batch_size=32)
+        noisy_paths, clean_paths, oris, dsts, ts, masks, dst_pos = prepare_batch(paths, pos, t_values, device, heat_kernels, num_nodes, batch_size=32)
         logits = model(noisy_paths, ts, oris, dsts, masks, pos, dst_pos)        
         loss = compute_loss(logits, clean_paths, masks, pos, num_nodes)        
         optimizer.zero_grad()
@@ -85,7 +85,7 @@ def main():
     # EXAMPLE PREDICTION
     print("Drawing a sample using beam search...\n\n")
     ori, dst, _ = random.choice(paths)
-    planned_path = beam_search_path(model, G, ori, dst, pos, beam_width=25, max_len=20)
+    planned_path = beam_search_path(model, G, ori, dst, pos, heat_kernels, num_nodes, beam_width=25, max_len=20)
     print("Planned path:", planned_path)
     plot_path(G, pos, planned_path, color='r', label='Planned Path')
 
@@ -95,7 +95,7 @@ def main():
     dtw_scores = []
     for i in range(20):
         ori, dst, gt_path = random.choice(paths)
-        pred_path = beam_search_path(model, G, ori, dst, pos, beam_width=BEAM_WIDTH, max_len=BEAM_MAX_LEN)
+        pred_path = beam_search_path(model, G, ori, dst, pos, heat_kernels, num_nodes, beam_width=BEAM_WIDTH, max_len=BEAM_MAX_LEN)
         if not is_valid_path(G, pred_path):
             hits.append(False)
             continue

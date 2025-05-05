@@ -287,14 +287,14 @@ class ReverseDiffusionModel(nn.Module):
         return logits
     
 
-def prepare_batch(paths, pos, t_values, device, batch_size=16):
+def prepare_batch(paths, pos, t_values, device, heat_kernels, num_nodes, batch_size=16):
     batch = random.sample(paths, batch_size)
     max_len = max(len(p[2]) for p in batch)
     noisy_paths, clean_paths, oris, dsts, ts, masks, dst_pos = [], [], [], [], [], [], []
     
     for ori, dst, path in batch:
         t = np.random.choice(t_values)  # Random timestep
-        noisy = diffuse_path(path, t)  # Diffuse the path
+        noisy = diffuse_path(path, t, heat_kernels, num_nodes)  # Diffuse the path
         
         path_len = len(path)
         pad_len = max_len - path_len
@@ -374,7 +374,7 @@ def compute_loss(logits, clean_paths, masks, adjacency_matrix, num_nodes):
     # Return total loss
     return ce_loss + con_loss
 
-def beam_search_path(model, G, ori, dst, pos, beam_width=5, max_len=20, t=1.0):
+def beam_search_path(model, G, ori, dst, pos, heat_kernels, num_nodes, beam_width=5, max_len=20, t=1.0):
     model.eval()
     beams = [([ori], 0.0)]  # Each beam is (path, cumulative_log_prob)
     dst_pos = [pos[dst]]
@@ -395,7 +395,7 @@ def beam_search_path(model, G, ori, dst, pos, beam_width=5, max_len=20, t=1.0):
                 continue  # Dead end
                 
             # Diffuse the path for the noisy version with reduced noise
-            noisy_path = diffuse_path(path, t=0.5)  # Smaller value for t reduces noise
+            noisy_path = diffuse_path(path, 0.5, heat_kernels, num_nodes)  # Smaller value for t reduces noise
             pad_len = max_len - len(noisy_path)
             noisy_path_tensor = torch.LongTensor([noisy_path + [0] * pad_len]).to(model.device)
             

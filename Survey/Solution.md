@@ -61,6 +61,12 @@ From this we can model the diffusion as  $q(v_t | v_{t-1}) = Cat(v_t | q(v_{t-1}
 The reverse process is modeled as,
 
 $$
-q(v_{t-1} | v_t, \hat v_0) = Cat(v_{t-1} | p \propto v_tC_t \circ \hat v_0 \bar C_{t-1}
+q(v_{t-1} | v_t, \hat v_0) = Cat(v_{t-1} | p \propto v_tC_t \circ \hat v_0 \bar C_{t-1})
 $$
+
+During the reverse process we do not have access to the original vertex $v_0$ and that makes sense because we don't want our model to cheat and use the ground truth to find the ground truth. We make assumptions and use an estimated value of $\hat v_0$. The categorical distribution combines information from $v_tC_t$, which is how we got from $v_0$ to $v_T$, and $\hat v_0 \bar C_{t-1}$, which is how we are supposed to go from $v_{t-1}$ back to the original vertex. Derivations in Appendix B.
+
+---
+
+
 

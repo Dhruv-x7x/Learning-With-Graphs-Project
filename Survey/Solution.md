@@ -68,5 +68,15 @@ During the reverse process we do not have access to the original vertex $v_0$ an
 
 ---
 
+### Diffusion Process for a Path
+
+Thereare two ways in which paths can be diffused: the first one involves maintaining vertex connectivity within the path while the other diffuses each vertex independently. The authors opt for option 2 for the following reasons:
+
+- Preserving connectivity without any information loss during the diffusion process is a difficult task because of conditional probabilities like $p(x_t^i | x_t^{i-1})$ that are introduced. This directly conflicts with diffusion models' non auto-regressive nature. Auto-regressive means that the vertices have a temporal dependency with each other which makes things complicated. Diffusion models are non auto-regressive in nature for tractability and simplicity.
+- Strict Connectivity makes $q(v_T)$ overly reliant on $q(v_0)$ which directly violates a requirement of the diffusion model as described above.
+
+So we treat the diffusion as contextual, independently diffusing each vertex such that for small $t$ values the noisy path is not too far off from the original path and for high $t$ values it is completely random, aiding sample generation. 
+
+---
 
 

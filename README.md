@@ -1,5 +1,5 @@
 # Learning-With-Graphs-Project
-This repository contains an implementation of the paper, "GRAPH-CONSTRAINED DIFFUSION FOR END-TO-END  PATH PLANNING" by Dingyuan Shi et. al. 
+This repository contains an implementation of the paper, "GRAPH-CONSTRAINED DIFFUSION FOR END-TO-END  PATH PLANNING" by Dingyuan Shi et. al. which was completed as a part of CS768 Learning With Graphs course at IIT Bombay in Spring 2025.
 
 ---
 
